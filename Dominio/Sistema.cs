@@ -1405,22 +1405,28 @@ namespace Dominio
             return partidos;
         }
 
-        public Partido GetParidoConMasGoles(List<Partido> listPartidos)
+        public List<Partido> GetParidoConMasGoles(List<Partido> listPartidos)
         {
             int conMasGoles = 0;
-            Partido retorno = null;
+            List<Partido> retorno = new List<Partido>();
             foreach (Partido partido in listPartidos)
             {
                 int contadorGoles = partido.CantidadDeUnTipoDeIncidencia(TipoDeIncidencia.GOL);
-                if (contadorGoles >= conMasGoles)
+                if (contadorGoles > conMasGoles)
                 {
+                    retorno.Clear();
                     conMasGoles = contadorGoles;
-                    retorno = partido;
+                    retorno.Add(partido);
+                }
+                if (contadorGoles == conMasGoles)
+                {
+                    retorno.Add(partido);
+
                 }
             }
             return retorno;
         }
-        public Partido MasGolesDeSeleccion(string nombre)
+        public List<Partido> MasGolesDeSeleccion(string nombre)
         {
             Seleccion seleccion = GetSeleccion(nombre);
             if (seleccion == null)
