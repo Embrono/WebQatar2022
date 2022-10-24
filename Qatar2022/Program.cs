@@ -174,8 +174,12 @@ namespace Qatar2022
                         string nombreSeleccion = Console.ReadLine();
                         try
                         {
-                            Partido paridoConMasGoles = instancia.MasGolesDeSeleccion(nombreSeleccion);
-                            Console.WriteLine(paridoConMasGoles.ToString());
+                            List<Partido> paridoConMasGoles = instancia.MasGolesDeSeleccion(nombreSeleccion);
+                            foreach(Partido p in paridoConMasGoles)
+                            {
+
+                            Console.WriteLine(p.ToString());
+                            }
 
                         }
                         catch (Exception e)
