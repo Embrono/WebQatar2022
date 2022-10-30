@@ -36,6 +36,19 @@ namespace Dominio
             _periodistas = new List<Periodista>();
             _partidos = new List<Partido>();
 
+            PreCargaPais();
+            PreCargaJugador();
+            PreCargaSelecciones();
+            PreCargaPartido();
+            PrecargarPeriodista();
+            PreCargaIncidencia();
+
+
+        }
+        public List<Jugador> GetJugadores()
+        {
+            int _ = _jugadores.Count;
+            return _jugadores;
         }
 
         public List<Partido> MostrarPartidosDe(string unId)
@@ -152,7 +165,7 @@ namespace Dominio
         {
             _paises.Add(pais);
         }
-        public void PreCargaPais()
+        private void PreCargaPais()
         {
             AltaPais(new Pais("Catar", "QAT"));
             AltaPais(new Pais("Alemania", "DEU"));
@@ -194,7 +207,7 @@ namespace Dominio
             _jugadores.Add(jugador);
         }
 
-        public void PreCargaJugador()
+        private void PreCargaJugador()
         {
             AltaJugador(new Jugador(1, "23", "Emiliano Martínez", DateTime.Parse("1992-09-02"), 1.95, "derecho", 28000000, "EUR", GetPais("Argentina"), "Portero"));
             AltaJugador(new Jugador(2, "12", "Gerónimo Rulli", DateTime.Parse("1992-05-20"), 1.89, "derecho", 6000000, "EUR", GetPais("Argentina"), "Portero"));
@@ -1102,7 +1115,7 @@ namespace Dominio
             _selecciones.Add(sel);
         }
 
-        public void PreCargaSelecciones()
+        private void PreCargaSelecciones()
         {
 
             //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
@@ -1167,7 +1180,7 @@ namespace Dominio
             return null;
         }
 
-        public void PreCargaPartido()
+        private void PreCargaPartido()
         {
 
             // ESTO SI
@@ -1250,7 +1263,7 @@ namespace Dominio
             //Seleccion seleccionLocal, Seleccion seleccionVisitante, DateTime fechaYHora, List<Incidencia> incidencias, string resultadoFinal, string nombreGrupo
         }
 
-        public void PreCargaIncidencia()
+        private void PreCargaIncidencia()
         {
 
             #region incidencias primer Partido CATAR 4 ECUADOR 0 catar + 3 
@@ -1462,7 +1475,7 @@ namespace Dominio
             retorno.Sort();
             return retorno;
         }
-        public void PrecargarPeriodista()
+        private void PrecargarPeriodista()
         {
             AgregarPeriodista(new Periodista("Jodri", "jordi@coll", "qrdawadwda4"));
         }

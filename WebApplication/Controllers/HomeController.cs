@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Dominio;
+using System.Collections.Generic;
 
 namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        Sistema instancia = Sistema.Instancia;
+        
         public IActionResult Index()
         {
             ViewBag.Mensaje = "Hola manu";
@@ -13,7 +16,9 @@ namespace WebApplication.Controllers
 
         public  IActionResult Tabla()
         {
-            return View();
+            List<Jugador> jugadores = instancia.GetJugadores();
+
+            return View(jugadores);
         }
     }
 }
