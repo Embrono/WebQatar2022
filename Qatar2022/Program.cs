@@ -25,27 +25,6 @@ namespace Qatar2022
             bool salir = false;
             string opcion;
             #region PreCarga
-            try
-            {
-                instancia.PreCargaPais();
-                instancia.PreCargaJugador();
-                instancia.PreCargaSelecciones();
-                instancia.PreCargaPartido();
-                instancia.PrecargarPeriodista();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            try
-            {
-
-                instancia.PreCargaIncidencia();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
             #endregion
             do
             {
