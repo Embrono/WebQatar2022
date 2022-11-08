@@ -16,9 +16,13 @@ namespace WebApplication.Controllers
 
         public  IActionResult Tabla()
         {
-            List<Jugador> jugadores = instancia.GetJugadores();
+            List<Seleccion> selecciones = instancia.GetSelecciones();
+            return View(selecciones);
+        }
 
-            return View(jugadores);
+        public IActionResult Registro()
+        {
+            return View();
         }
     }
 }

@@ -1,27 +1,22 @@
 ﻿
 @using Dominio;
-@model List<Jugador>;
+@model List<Seleccion>;
 
-<h1>Jugadores</h1>
 
-<table class="table table-striped table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Person 1</th>
-            <th scope ="col">Person 2</th>
-            <th scope="col">Person 3</th>
-        </tr>
-    </thead>
 
-    <tbody>
-            @foreach(Jugador j in Model)
-            {
-                <tr>
-                    <th scope="row">@j.Nombre</th>
-                    <th scope="row"> @j.Id</th>
-                    <th scope="row"> @j.Precio</th>
 
-                </tr>
-            }
-     </tbody>
-</table>
+<h1>Selecciones</h1>
+
+
+
+@foreach(Seleccion s in Model)
+{
+
+        <h2>@s.Pais.Nombre</h2>
+        string jugadores = "Jugadores ";
+        foreach (Jugador j in s.GetJugadores()){
+            jugadores += " " + j.Nombre + " ";
+        }
+        <p>@jugadores</p>
+}
+

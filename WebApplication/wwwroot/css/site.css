@@ -1,6 +1,10 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -12,6 +16,11 @@ a {
   color: #0366d6;
 }
 
+body{
+    background-image: url("../img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -68,4 +77,32 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+main{
+    background-color: rgba(255,255,255,0.3);
+    width: 1200px;
+    
+}
+
+
+
+input{
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+label {
+    margin-left: 510px;
+}
+
+#login{
+    width: 100%;
+    justify-content: center;
+}
+
+h1{
+    text-align: center;
 }
