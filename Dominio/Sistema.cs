@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Dominio
@@ -1481,6 +1482,26 @@ namespace Dominio
         private void PrecargarPeriodista()
         {
             AgregarPeriodista(new Periodista("Jodri", "jordi@coll", "qrdawadwda4"));
+        }
+
+        public bool Login(string nombre, string password)
+        {
+            foreach(Periodista p in _periodistas)
+            {
+                if(p.Email == nombre && p.Password == password){ return true; }
+            }
+            return false;
+        }
+
+        public Periodista GetPeriodista(string email)
+        {
+            foreach(Periodista p in _periodistas)
+            {
+                if(p.Email == email) 
+                    return p;
+            }
+
+            return null;
         }
     }
 }

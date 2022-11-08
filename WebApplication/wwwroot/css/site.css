@@ -85,24 +85,3 @@ main{
     
 }
 
-
-
-input{
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 10px;
-}
-
-
-label {
-    margin-left: 510px;
-}
-
-#login{
-    width: 100%;
-    justify-content: center;
-}
-
-h1{
-    text-align: center;
-}
