@@ -47,8 +47,11 @@ namespace Dominio
         }
         public List<Jugador> GetJugadores()
         {
-            int _ = _jugadores.Count;
             return _jugadores;
+        }
+        public List<Seleccion> GetSelecciones() 
+        {
+            return _selecciones;
         }
 
         public List<Partido> MostrarPartidosDe(string unId)

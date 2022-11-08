@@ -28,6 +28,12 @@ namespace Dominio
             _resenas = new List<Resena>();
         }
 
+        public Periodista() {
+            
+            Id = LastID;
+            LastID++;
+        }
+
 
         public override string ToString()
         {

@@ -35,7 +35,10 @@ namespace Dominio
         {
             return Pais.ToString();
         }
-
+        public List<Jugador> GetJugadores()
+        {
+            return _jugadores;
+        }
     }
 
 }
