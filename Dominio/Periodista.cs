@@ -10,10 +10,10 @@ namespace Dominio
     {
         private static int LastID = 0;
         public int Id { get; }
-        public string Nombre;
+        public string Nombre { get; set; }
 
         public string Email;
-        public string Password;
+        public string Password { get; set; }
         private List<Resena> _resenas;
 
 

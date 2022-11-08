@@ -2,19 +2,15 @@
 }
 
 
-<section id="login">
-
-<h1>Qatar 2022</h1>
-    <section id="aux-login">
-        <label for="txtNombre">Nombre</label>
-        <input type="text" id="txtNombre"/>
-
-        <label for="txtEmail">E-mail</label>
-        <input type="text" id="txtEmail"/>
-
-        <input type="submit" id="btnIngresar" value="Ingresar"/>
-    </section>
-    <p>No tienes cuenta?<a href="Home/Registro">Registrate!</a></p>
-    <p>Mira las seleciones participantes<a href="Home/Tabla"> Aqui! </a></p>
-
-</section>
+<form method="post">
+  <h1>Periodista</h1>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter email" name="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
