@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using Dominio
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,7 +20,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
                     <ul class="navbar-nav flex-grow-1">
+                    @if(String.IsNullOrWhiteSpace(Context.Session.GetString("permisos")))
+                    {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -30,6 +36,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Participantes">Participantes</a>
                         </li>
+                    }
+                    @if(Context.Session.GetString("permisos") == "periodista")
+                    {
+                             
+                      <li class="nav-item">
+                          <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Participantes">Entre</a>
+                      </li>
+                      
+                    }
+                    @if (Context.Session.GetString("permisos") == "operador")
+                    {
+
+                    }
                     </ul>
                 </div>
             </div>

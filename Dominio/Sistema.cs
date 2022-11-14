@@ -1481,7 +1481,7 @@ namespace Dominio
         }
         private void PrecargarPeriodista()
         {
-            AgregarPeriodista(new Periodista("Jodri", "jordi@coll", "qrdawadwda4"));
+            AgregarPeriodista(new Periodista("Jodri", "jordi@coll", "qwerqwer1234"));
         }
 
         public bool Login(string nombre, string password)
@@ -1503,5 +1503,7 @@ namespace Dominio
 
             return null;
         }
+
+        
     }
 }
