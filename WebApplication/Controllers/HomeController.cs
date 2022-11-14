@@ -26,10 +26,12 @@ namespace WebApplication.Controllers
             HttpContext.Session.SetString("email", email);
             HttpContext.Session.SetString("permisos", "periodista");
 
-        return RedirectToAction("Index", "Periodista");
+            return RedirectToAction("Index", "Periodista");
           }
           return View();
         }
+
+        public IActionResult NoTienePermiso() { return View(); }
 
 
         public  IActionResult Participantes()

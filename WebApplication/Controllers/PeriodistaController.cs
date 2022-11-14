@@ -9,7 +9,13 @@ namespace WebApplication.Controllers
         {
             Sistema intancia = Sistema.Instancia;
             ViewBag.Email = HttpContext.Session.GetString("email");
+            ViewBag.Permisos = HttpContext.Session.GetString("permisos");
+            if(ViewBag.Permisos == "periodista")
+            {
             return View();
+            }
+
+            return RedirectToAction("NoTienePermiso", "Home");
         }
     }
 }
