@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Net.Mail;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -100,6 +101,7 @@ namespace Dominio
             return retorno;
         }
 
+
         public List<Jugador> JugadoresConGol()
         {
             List<Jugador> retorno = new List<Jugador>();
@@ -119,6 +121,33 @@ namespace Dominio
             return true;
         }
 
+        public int CantidadIncidencias()
+        {
+            return _incidencias.Count;
+        }
+
+        public string Resultado()
+        {
+            string resultado = "";
+  
+            resultado += this.SeleccionLocal.Pais.Nombre;
+            foreach (Jugador j in this.SeleccionLocal.GetJugadores())
+            {
+
+            }
+            resultado += this.SeleccionLocal.Pais.Nombre;
+            foreach (Jugador j in this.SeleccionVisitante.GetJugadores())
+            {
+
+            }
+
+            return resultado;
+        }
         public abstract void TerminarPartido();
+        public abstract List<String> TotalIncidencia();
+        public abstract string FaseOEtapa();
+
+
+
     }
 }

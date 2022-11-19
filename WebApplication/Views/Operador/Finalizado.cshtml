@@ -1,0 +1,45 @@
+﻿@using Dominio
+@using Microsoft.AspNetCore.Http;
+@model Partido;
+
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorFinalizar))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorFinalizar
+    </div>
+}
+else
+{
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Finalizado</h4>
+        <hr>
+        <p>@Model.GetType().Name</p>
+        <p>@Model.FechaYHora</p>
+        @if(Model.GetType().Name == "FaseGrupos")
+        {
+            <p> FASE:@Model.FaseOEtapa()</p>
+            <p>@Model.SeleccionLocal.Pais.Nombre;</p>
+            <p>@Model.TotalIncidencia()[0]</p>
+            <hr>
+            <p>@Model.SeleccionVisitante.Pais.Nombre;</p>
+            <p>@Model.TotalIncidencia()[1]</p>
+        }
+        else
+        {
+            <p> FASE:@Model.FaseOEtapa()</p>
+            <p>@Model.SeleccionLocal.Pais.Nombre;</p>
+            <p>@Model.TotalIncidencia()[0]</p>
+            <p>@Model.TotalIncidencia()[2]</p>
+
+            <hr>
+            <p>@Model.SeleccionVisitante.Pais.Nombre;</p>
+            <p>@Model.TotalIncidencia()[1]</p>
+            <p>@Model.TotalIncidencia()[3]</p>
+
+        }
+        <hr>
+        <p class="mb-0">@Model.ResultadoFinal</p>
+    </div>
+}
+

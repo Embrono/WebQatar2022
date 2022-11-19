@@ -1,7 +1,14 @@
 ﻿@{
 }
 
+@if(!String.IsNullOrEmpty(ViewBag.ErrorLogin))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorLogin
+    </div>
+}
 
+<div class="container">
 <form method="post">
   <h1>Periodista</h1>
   <div class="form-group">
@@ -14,3 +21,4 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>

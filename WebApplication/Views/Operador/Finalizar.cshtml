@@ -1,0 +1,45 @@
+﻿@using Dominio
+@using Microsoft.AspNetCore.Http;
+@model List<Partido>;
+
+<div class="container">
+    <h1>Finalizar Partidos</h1>
+
+   
+   @foreach(Partido p in Model)
+   {
+        <div class="alert alert-primary" role="alert">
+            @if (p.GetType().Name == "FaseGrupos")
+            {
+                <h4 class="alert-heading">Grupos</h4>
+            }
+            else
+            {
+                <h4 class="alert-heading">Eliminatoria</h4>
+            }
+            <hr>
+            <strong>@p.FechaYHora</strong>
+            <hr>
+            <p>
+                <strong>@p.SeleccionLocal.Pais.Nombre</strong>
+            </p>
+            <p>
+                <strong>@p.SeleccionVisitante.Pais.Nombre</strong>
+            </p>
+            <p>
+                <strong>@p.ResultadoFinal</strong>
+            </p>
+            <p>
+                <a class="btn btn-primary" href="~/Operador/Finalizado/@p.Id">Finalizar</a>
+            </p>
+
+            
+        </div>
+
+    }
+   
+    
+
+
+</div>
+

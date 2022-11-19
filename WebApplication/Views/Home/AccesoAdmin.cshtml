@@ -1,6 +1,10 @@
-﻿@{
+﻿
+@if (!String.IsNullOrEmpty(ViewBag.ErrorLogin))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorLogin
+    </div>
 }
-
 
 <form method="post">
   <h1>Admin</h1>
