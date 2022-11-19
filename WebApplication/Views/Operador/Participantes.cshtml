@@ -1,0 +1,24 @@
+﻿@using Dominio
+@using Microsoft.AspNetCore.Http;
+@model List<Seleccion>;
+
+
+<div class="container">
+@foreach (Seleccion s in Model)
+{
+
+    string jugadores = "Jugadores: ";
+    <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">@s.Pais.Nombre</h4>
+        <hr>
+        @foreach (Jugador j in s.GetJugadores())
+        {
+            jugadores += " " + j.Nombre + ", ";
+        }
+
+        <p class="mb-0">@jugadores</p>
+
+
+    </div>
+}
+</div>

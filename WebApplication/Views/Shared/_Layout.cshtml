@@ -14,7 +14,10 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Qatar2022</a>
+                @if (String.IsNullOrWhiteSpace(Context.Session.GetString("permisos")))
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Qatar2022</a>
+                }
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -47,7 +50,21 @@
                     }
                     @if (Context.Session.GetString("permisos") == "operador")
                     {
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="Participantes">Participantes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="PartidosJugados">Partidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="Finalizar">Finalizar</a>
+                        </li>
+                    }
+                    @if (Context.Session.GetString("permisos") == "operador" || Context.Session.GetString("permisos") == "periodista")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CerrarSesion">CerrarSesion</a>
+                        </li>
                     }
                     </ul>
                 </div>

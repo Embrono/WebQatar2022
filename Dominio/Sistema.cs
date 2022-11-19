@@ -15,6 +15,7 @@ namespace Dominio
         private List<Seleccion> _selecciones;
         private List<Periodista> _periodistas;
         private List<Partido> _partidos;
+        private List<Operador> _operadores;
 
         private static Sistema instancia;
         public static Sistema Instancia
@@ -36,6 +37,7 @@ namespace Dominio
             _selecciones = new List<Seleccion>();
             _periodistas = new List<Periodista>();
             _partidos = new List<Partido>();
+            _operadores = new List<Operador>();
 
             PreCargaPais();
             PreCargaJugador();
@@ -43,6 +45,7 @@ namespace Dominio
             PreCargaPartido();
             PrecargarPeriodista();
             PreCargaIncidencia();
+            PrecargarOperador();
 
 
         }
@@ -1284,6 +1287,7 @@ namespace Dominio
             _jugadores[455].AgregarIncidencia(_partidos[0], TipoDeIncidencia.ROJA, 22);
             _jugadores[456].AgregarIncidencia(_partidos[0], TipoDeIncidencia.ROJA, 21);
             _jugadores[457].AgregarIncidencia(_partidos[0], TipoDeIncidencia.ROJA, 20);
+            _partidos[0].TerminarPartido();
             #endregion
 
             #region segundo Partido Iran 2 Inglaterra 1 iran  + 3 
@@ -1293,6 +1297,7 @@ namespace Dominio
             _jugadores[266].AgregarIncidencia(_partidos[1], TipoDeIncidencia.GOL, 56);
             _jugadores[266].AgregarIncidencia(_partidos[1], TipoDeIncidencia.AMARILLA, 1);
             _jugadores[275].AgregarIncidencia(_partidos[1], TipoDeIncidencia.ROJA, 1);
+            _partidos[1].TerminarPartido();
             #endregion
 
             #region tercer Partido Senegal 1 Paises bajos 0 senegal + 3
@@ -1300,7 +1305,7 @@ namespace Dominio
 
             _jugadores[340].AgregarIncidencia(_partidos[2], TipoDeIncidencia.AMARILLA, 1);
             _jugadores[340].AgregarIncidencia(_partidos[2], TipoDeIncidencia.ROJA, 1);
-
+            _partidos[2].TerminarPartido();
             #endregion
 
             #region cuarto Partido Gales 1 EEUU 0 gales + 3
@@ -1308,6 +1313,7 @@ namespace Dominio
 
             _jugadores[808].AgregarIncidencia(_partidos[3], TipoDeIncidencia.AMARILLA, 1);
             _jugadores[809].AgregarIncidencia(_partidos[3], TipoDeIncidencia.ROJA, 1);
+            _partidos[3].TerminarPartido();
             #endregion
 
             #region quinto Partido Gales 1 iran 2  iran + 3
@@ -1319,6 +1325,7 @@ namespace Dominio
 
             _jugadores[808].AgregarIncidencia(_partidos[16], TipoDeIncidencia.AMARILLA, 1);
             _jugadores[809].AgregarIncidencia(_partidos[16], TipoDeIncidencia.ROJA, 1);
+            _partidos[16].TerminarPartido();
             #endregion
 
             #region sexto partido catar 3 senegal 1 +3
@@ -1330,6 +1337,7 @@ namespace Dominio
 
             _jugadores[52].AgregarIncidencia(_partidos[17], TipoDeIncidencia.AMARILLA, 85);
             _jugadores[52].AgregarIncidencia(_partidos[17], TipoDeIncidencia.ROJA, 86);
+            _partidos[17].TerminarPartido();
             #endregion
 
             #region septimo partido paises bajos 0  ecuador 1 ecuador +3 
@@ -1337,6 +1345,7 @@ namespace Dominio
 
             _jugadores[455].AgregarIncidencia(_partidos[18], TipoDeIncidencia.AMARILLA, 85);
             _jugadores[457].AgregarIncidencia(_partidos[18], TipoDeIncidencia.ROJA, 86);
+            _partidos[18].TerminarPartido();
             #endregion
 
             #region octavo partido inglaterra 1  EEUU 0 inglaterra +3 
@@ -1344,6 +1353,7 @@ namespace Dominio
 
             _jugadores[266].AgregarIncidencia(_partidos[19], TipoDeIncidencia.AMARILLA, 85);
             _jugadores[266].AgregarIncidencia(_partidos[19], TipoDeIncidencia.ROJA, 86);
+            _partidos[19].TerminarPartido();
             #endregion
 
             #region noveno partido ecuador 0  senegal 1 
@@ -1384,6 +1394,7 @@ namespace Dominio
 
             _jugadores[43].AgregarIncidencia(_partidos[48], TipoDeIncidencia.AMARILLA, 10);
             _jugadores[47].AgregarIncidencia(_partidos[48], TipoDeIncidencia.ROJA, 65);
+            _partidos[48].TerminarPartido();
             #endregion
 
             #region partido eliminatoria 2  iran 1  ecuador 0
@@ -1394,6 +1405,7 @@ namespace Dominio
 
             _jugadores[369].AgregarIncidencia(_partidos[49], TipoDeIncidencia.AMARILLA, 1);
             _jugadores[360].AgregarIncidencia(_partidos[49], TipoDeIncidencia.ROJA, 87);
+            _partidos[49].TerminarPartido();
             #endregion
 
 
@@ -1493,6 +1505,15 @@ namespace Dominio
             return false;
         }
 
+        public bool LoginOperador(string nombre, string password)
+        {
+            foreach (Operador o in _operadores)
+            {
+                if (o.Email == nombre && o.Password == password) { return true; }
+            }
+            return false;
+        }
+
         public Periodista GetPeriodista(string email)
         {
             foreach(Periodista p in _periodistas)
@@ -1504,6 +1525,61 @@ namespace Dominio
             return null;
         }
 
+        public void AgregarOperador(Operador operador)
+        {
+            foreach (Operador o in _operadores)
+            {
+              if (operador.Email == o.Email) { throw new Exception("YA EXISTE ESE PEDIODISTA"); }
+            }
+
+            _operadores.Add(operador);
+        }
         
+        private void PrecargarOperador()
+        {
+              AgregarOperador(new Operador("andres@lopez", "andres", "lopez", "embronoel1", new DateTime(2022,9,12)));
+              AgregarOperador(new Operador("coll@jordi", "jordi", "coll", "jorgepedro1", new DateTime(2022, 6, 5)));
+        }
+
+        public List<Partido> GetPartidos()
+        {
+            return _partidos;
+        }
+
+        public List<Partido> GetPartidosTerminados()
+        {
+            List<Partido> retorno = new List<Partido>();
+
+            foreach(Partido p in _partidos)
+            {
+                if (p.Finalizado) { retorno.Add(p); }
+            }
+            return retorno;
+        }
+
+        public List<Partido> GetPartidosNoTerminados()
+        {
+            List<Partido> retorno = new List<Partido>();
+
+            foreach (Partido p in _partidos)
+            {
+                if (!p.Finalizado) { retorno.Add(p); }
+            }
+            return retorno;
+        }
+
+        public Partido GetPartido(string id)
+        {
+            int numId = int.Parse(id);
+
+            foreach(Partido p in _partidos)
+            {
+                if(p.Id == numId)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
     }
-}
+} 
