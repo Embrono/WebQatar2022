@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Dominio
 {
@@ -82,6 +83,12 @@ namespace Dominio
                 return Nombre.CompareTo(otro.Nombre);
             }
             return Precio.CompareTo(otro.Precio) * -1;
+        }
+
+        public Seleccion GetSeleccion()
+        {
+            Sistema sistema = Sistema.Instancia;
+            return sistema.GetSeleccion(this.Pais.Nombre);
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace Qatar2022
                         string password = Console.ReadLine();
                         try
                         {
-                            instancia.AgregarPeriodista(new Periodista(nombre, email, password));
+                            instancia.AgregarPeriodista(new Periodista(nombre, nombre, email, password));
                         }
                         catch (Exception e)
                         {

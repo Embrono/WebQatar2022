@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Periodista : IValidable
+    public class Periodista : IValidable, IComparable
     {
         private static int LastID = 0;
         public int Id { get; }
         public string Nombre { get; set; }
-
-        public string Email;
+        public string Apellido { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         private List<Resena> _resenas;
 
 
-        public Periodista(string nombre, string email, string password)
+        public Periodista(string nombre, string apellido, string email, string password)
         {
             Id = LastID;
             LastID++;
             Nombre = nombre;
+            Apellido = apellido;
             Email = email;
             Password = password;
 
@@ -51,6 +52,10 @@ namespace Dominio
             {
                 throw new Exception("Nombre vacio");
             }
+            if (Apellido.Length == 0)
+            {
+                throw new Exception("Apellido vacio");
+            }
             if (Password.Length == 0 || Password.Length < 8)
             {
                 throw new Exception(" Password invalido");
@@ -66,6 +71,18 @@ namespace Dominio
             }
             return true;
         }
+
+        public int CompareTo(object obj)
+        {
+            Periodista periodista = obj as Periodista;
+            if (Apellido.CompareTo(periodista.Apellido) == 0)
+            {
+                return Nombre.CompareTo(periodista.Nombre);
+            }
+            return Apellido.CompareTo(periodista.Apellido);
+        }
+
+        public List<Resena> GetResenas { get { return _resenas; } }
 
     }
 }

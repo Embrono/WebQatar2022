@@ -102,5 +102,109 @@ namespace WebApplication.Controllers
 
 
         }
+        
+        public IActionResult PartidoFecha() 
+        {
+            ViewBag.Email = HttpContext.Session.GetString("email");
+            ViewBag.Permisos = HttpContext.Session.GetString("permisos");
+            if (ViewBag.Permisos == "operador")
+            {
+                return View();
+            }
+
+            return RedirectToAction("NoTienePermiso", "Home");
+        }
+        [HttpPost]
+        public IActionResult PartidoFecha(DateTime fechaInico, DateTime fechaFin)     
+        {
+            ViewBag.Email = HttpContext.Session.GetString("email");
+            ViewBag.Permisos = HttpContext.Session.GetString("permisos");
+            if (ViewBag.Permisos == "operador")
+            {
+                Sistema instancia = Sistema.Instancia;
+                List<Partido> partidos = instancia.GetPartidosTerminados();
+                try
+                {
+                    List<Partido> partidosFecha = instancia.GetPartidosPorFecha(partidos, fechaInico, fechaFin);
+                    return View(partidosFecha);
+                }
+                catch(Exception e)
+                {
+                    ViewBag.ErrorPartidoFecha = e.Message;
+                    return View();
+                }
+            }
+
+            return RedirectToAction("NoTienePermiso", "Home");
+        }
+
+        public IActionResult Estadistica()
+        {
+            ViewBag.Email = HttpContext.Session.GetString("email");
+            ViewBag.Permisos = HttpContext.Session.GetString("permisos");
+            if (ViewBag.Permisos == "operador")
+            {
+                Sistema instancia = Sistema.Instancia;
+                return View(instancia.GetSeleccionConMasGoles());
+            }
+            return RedirectToAction("NoTienePermiso", "Home");
+        }
+
+        public IActionResult PeriodistaRoja()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult PeriodistaRoja(string? email)
+        {
+            ViewBag.Email = HttpContext.Session.GetString("email");
+            ViewBag.Permisos = HttpContext.Session.GetString("permisos");
+            
+            if (ViewBag.Permisos == "operador")
+            {
+                List<Resena> retorno = new List<Resena>();
+                Sistema instancia = Sistema.Instancia;
+                Periodista periodista = instancia.GetPeriodista(email);
+                if(periodista == null) { ViewBag.ErrorPeriodistaRoja = "No existe el periodista"; }
+                else
+                {
+                    ViewBag.NombrePeriodista = periodista.Nombre;
+                List<Resena> resenaList = periodista.GetResenas;
+                foreach (Resena resena in resenaList)
+                {
+                   if(resena.TieneRoja()) { retorno.Add(resena); }
+                }
+                }
+
+                return View(retorno);
+
+            }
+            return RedirectToAction("NoTienePermiso", "Home");
+        }
+
+        public IActionResult PeriodistaResena()
+        {
+            Sistema instancia = Sistema.Instancia;
+            List<Periodista> retorno = instancia.GetPeriodistas();
+            return View(retorno) ;
+        }
+
+        public IActionResult PeriodistaResenaId(string? email)
+        {
+            Sistema instancia = Sistema.Instancia;
+
+            Periodista periodista = instancia.GetPeriodista(email);
+
+            if(periodista == null) 
+            {
+                ViewBag.Error = "Existe Periodistta";
+                return View(); 
+            }
+
+            return View(periodista.GetResenas);
+        }
+
     }
 }

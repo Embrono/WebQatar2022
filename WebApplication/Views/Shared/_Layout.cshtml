@@ -59,6 +59,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="Finalizar">Finalizar</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="PartidoFecha">Ver Partidos Por fecha</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="Estadistica">Estadistica</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="PeriodistaRoja">Buscar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Operador" asp-action="PeriodistaResena">Reseñas</a>
+                        </li>
                     }
                     @if (Context.Session.GetString("permisos") == "operador" || Context.Session.GetString("permisos") == "periodista")
                     {

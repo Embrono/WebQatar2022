@@ -1493,7 +1493,7 @@ namespace Dominio
         }
         private void PrecargarPeriodista()
         {
-            AgregarPeriodista(new Periodista("Jodri", "jordi@coll", "qwerqwer1234"));
+            AgregarPeriodista(new Periodista("Jodri", "Coll", "jordi@coll", "qwerqwer1234"));
         }
 
         public bool Login(string nombre, string password)
@@ -1580,6 +1580,49 @@ namespace Dominio
                 }
             }
             return null;
+        }
+
+        public List<Partido> GetPartidosPorFecha(List<Partido> partidos, DateTime fechaInicio, DateTime fechaFin)
+        {
+            List<Partido> retorno = new List<Partido>(); 
+
+
+            if (fechaInicio > fechaFin) { throw new Exception("Fecha no valida"); }
+            foreach (Partido p in partidos)
+            {
+                if(p.FechaYHora >= fechaInicio && p.FechaYHora <= fechaFin)
+                {
+                    retorno.Add(p);
+                }
+            }
+            return retorno;
+        }
+
+        public List<Seleccion> GetSeleccionConMasGoles()
+        {
+            List<Seleccion> retorno = new List<Seleccion>();
+            int contadorGoles = 0;
+   
+            foreach(Partido p in _partidos)
+            {
+                if(p.CantidadMayorDeGol() == contadorGoles)
+                {
+                    retorno.Add(p.SeleccionMayorDegol());
+                }
+                if (p.CantidadMayorDeGol() > contadorGoles)
+                {
+                    retorno.Clear();
+                    retorno.Add(p.SeleccionMayorDegol());
+                    contadorGoles = p.CantidadMayorDeGol();
+                }
+            }
+            return retorno;
+        }
+        public List<Periodista> GetPeriodistas()
+        {
+            List<Periodista> retorno = _periodistas;
+            retorno.Sort();
+            return retorno;
         }
     }
 } 

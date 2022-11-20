@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Dominio
+@model List<Periodista>
+
+
+@if(Model != null && Model.Count > 0)
+{
+    foreach (Periodista periodista in Model)
+    {
+        
+        <div class="alert alert-primary" role="alert">
+                @periodista.Nombre , @periodista.Apellido <a href="~/Operador/PeriodistaResenaId/@periodista.Email" class="alert-link">Mira Sus reseñas</a>.
+        </div>
+    }
+}
