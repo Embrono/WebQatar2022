@@ -43,9 +43,17 @@
                     @if(Context.Session.GetString("permisos") == "periodista")
                     {
                              
-                      <li class="nav-item">
-                          <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Participantes">Entre</a>
-                      </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Periodista" asp-action="Resena">Resena</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Periodista" asp-action="ResenasRealizadas">Resenas Realizadas</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Periodista" asp-action="PartidoFinalizado">Partidos Finalizados</a>
+                        </li>
                       
                     }
                     @if (Context.Session.GetString("permisos") == "operador")
