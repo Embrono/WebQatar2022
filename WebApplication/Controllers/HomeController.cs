@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace WebApplication.Controllers
@@ -18,8 +19,8 @@ namespace WebApplication.Controllers
         [HttpPost]
         public IActionResult Index(string email, string password)
         {
+            email = email.ToLower();
             Sistema instancia = Sistema.Instancia;
-
             if (instancia.Login(email, password))
             {
                 HttpContext.Session.SetString("email", email);
@@ -41,10 +42,26 @@ namespace WebApplication.Controllers
             selecciones.Sort();
             return View(selecciones);
         }
-
-        public IActionResult Registro()
+        public IActionResult Registro(string error)
         {
-            return View();
+            ViewBag.Error = error;
+            return View(new Periodista());
+        }
+        [HttpPost]
+        public IActionResult Registro(Periodista periodista)
+        {
+            periodista.Email = periodista.Email.ToLower();
+            Sistema instancia = Sistema.Instancia;
+            try
+            {
+                instancia.AgregarPeriodista(periodista);
+                return RedirectToAction("Registro");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Registro", new { error = e.Message });
+
+            }
         }
 
         public IActionResult AccesoAdmin()
@@ -55,6 +72,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public IActionResult AccesoAdmin(string email, string password)
         {
+            email = email.ToLower();
             Sistema instancia = Sistema.Instancia;
             if (instancia.LoginOperador(email, password))
             {

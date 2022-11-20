@@ -186,24 +186,39 @@ namespace WebApplication.Controllers
 
         public IActionResult PeriodistaResena()
         {
-            Sistema instancia = Sistema.Instancia;
-            List<Periodista> retorno = instancia.GetPeriodistas();
-            return View(retorno) ;
+            ViewBag.Email = HttpContext.Session.GetString("email");
+            ViewBag.Permisos = HttpContext.Session.GetString("permisos");
+
+            if (ViewBag.Permisos == "operador")
+            {
+                Sistema instancia = Sistema.Instancia;
+                List<Periodista> retorno = instancia.GetPeriodistas();
+                return View(retorno);
+
+            }
+            return RedirectToAction("NoTienePermiso", "Home");
         }
 
-        public IActionResult PeriodistaResenaId(string? email)
+        public IActionResult PeriodistaResenaId(string email)
         {
-            Sistema instancia = Sistema.Instancia;
-
-            Periodista periodista = instancia.GetPeriodista(email);
-
-            if(periodista == null) 
+            ViewBag.Email = HttpContext.Session.GetString("email");
+            ViewBag.Permisos = HttpContext.Session.GetString("permisos");
+            
+            if (ViewBag.Permisos == "operador")
             {
-                ViewBag.Error = "Existe Periodistta";
-                return View(); 
-            }
+                Sistema instancia = Sistema.Instancia;
 
-            return View(periodista.GetResenas);
+                Periodista periodista = instancia.GetPeriodista(email); ;
+
+                if(periodista == null) 
+                {
+                    ViewBag.Error = " No Existe Periodista";
+                    return View(); 
+                }
+
+                return View(periodista.GetResenas);
+            }
+            return RedirectToAction("NoTienePermiso", "Home");
         }
 
     }

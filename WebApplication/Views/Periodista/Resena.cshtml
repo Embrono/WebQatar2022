@@ -1,0 +1,39 @@
+﻿@using Dominio;
+@model List<Partido>;
+
+@if (!string.IsNullOrEmpty(ViewBag.ExitoResena))
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.ExitoResena
+    </div>
+}
+@if (!string.IsNullOrEmpty(ViewBag.ErrorResena))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorResena
+    </div>
+}
+<form method="post">
+  <div class="form-group">
+    <label for="SeleccionarPartido">Partidos Finalizados</label>
+        <select class="form-control" id="SeleccionarPartido" name="Partido">
+            @foreach(Partido p in Model)
+            {
+                <option value="@p.Id">@p.ResultadoFinal @p.SeleccionLocal.Pais.Nombre @p.SeleccionVisitante.Pais.Nombre</option>
+            }
+        </select>
+  </div>
+
+
+    <div class="form-group">
+        <label for="TextoResena">Titulo</label>
+        <input type="text" id="TextoResena" name="Titulo"></>
+    </div>
+    <div class="form-group">
+        <label for="ContenidoResena">Contenido</label>
+        <textarea class="form-control" id="ContenidoResena" rows="3" name="Contenido"></textarea>
+  </div>
+
+ <button type="submit" class="btn btn-primary mb-2">Agregar Resena</button>
+
+</form>
