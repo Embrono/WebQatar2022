@@ -32,5 +32,10 @@ namespace Dominio
                 throw new Exception("EL PARTIDO NO TERMINO");
             }
         }
+
+        public bool TieneRoja()
+        {
+            return this.Partido.CantidadDeUnTipoDeIncidencia(TipoDeIncidencia.ROJA) > 0;
+        }
     }
 }

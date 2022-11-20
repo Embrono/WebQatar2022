@@ -143,6 +143,49 @@ namespace Dominio
 
             return resultado;
         }
+
+        public int CantidadMayorDeGol()
+        {
+            int contadorLocal = 0;
+            int contadorVisitante = 0;
+            foreach(Incidencia i in _incidencias)
+            {
+                if(i.TipoDeIncidencia == TipoDeIncidencia.GOL)
+                {
+                    if (i.Jugador.GetSeleccion().Equals(this.SeleccionLocal))
+                    {
+                        contadorLocal++;
+                    }
+                    else
+                    {
+                        contadorVisitante++;
+                    }
+                }
+            }
+            
+            return contadorLocal>contadorVisitante? contadorLocal : contadorVisitante;
+        }
+        public Seleccion SeleccionMayorDegol()
+        {
+            int contadorLocal = 0;
+            int contadorVisitante = 0;
+            foreach (Incidencia i in _incidencias)
+            {
+                if (i.TipoDeIncidencia == TipoDeIncidencia.GOL)
+                {
+                    if (i.Jugador.GetSeleccion().Equals(this.SeleccionLocal))
+                    {
+                        contadorLocal++;
+                    }
+                    else
+                    {
+                        contadorVisitante++;
+                    }
+                }
+            }
+
+            return contadorLocal > contadorVisitante ? this.SeleccionLocal : this.SeleccionVisitante;
+        }
         public abstract void TerminarPartido();
         public abstract List<String> TotalIncidencia();
         public abstract string FaseOEtapa();
