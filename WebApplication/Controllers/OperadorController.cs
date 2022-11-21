@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace WebApplication.Controllers
@@ -199,16 +200,29 @@ namespace WebApplication.Controllers
             return RedirectToAction("NoTienePermiso", "Home");
         }
 
-        public IActionResult PeriodistaResenaId(string email)
+  
+        public IActionResult ResenaId(String id)
         {
             ViewBag.Email = HttpContext.Session.GetString("email");
             ViewBag.Permisos = HttpContext.Session.GetString("permisos");
-            
+            int idNum = 0;
+            try
+            {
+                
+                idNum = int.Parse(id);
+
+            }
+            catch(Exception e)
+            {
+                return View();
+            }
+
+
             if (ViewBag.Permisos == "operador")
             {
                 Sistema instancia = Sistema.Instancia;
 
-                Periodista periodista = instancia.GetPeriodista(email); ;
+                Periodista periodista = instancia.GetPeriodista(idNum); ;
 
                 if(periodista == null) 
                 {
