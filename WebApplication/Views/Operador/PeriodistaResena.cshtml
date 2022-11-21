@@ -10,11 +10,10 @@
 @if(Model != null && Model.Count > 0)
 {
     foreach (Periodista periodista in Model)
-    {
-        
+    {        
         <div class="alert alert-primary" role="alert">
            <p>@periodista.Nombre , @periodista.Apellido</p> 
-           <a href="~/Operador/PeriodistaResenaId/@periodista.Email" class="btn btn-primary" name="email">Mira Sus reseñas</a>.
+           <a href="~/Operador/ResenaId/@periodista.Id" >Mira Sus reseñas</a>.
         </div>
     }
 }

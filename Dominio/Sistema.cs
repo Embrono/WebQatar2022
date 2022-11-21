@@ -1525,6 +1525,17 @@ namespace Dominio
             return null;
         }
 
+        public Periodista GetPeriodista(int id)
+        {
+            foreach (Periodista p in _periodistas)
+            {
+                if (p.Id == id)
+                    return p;
+            }
+
+            return null;
+        }
+
         public void AgregarOperador(Operador operador)
         {
             foreach (Operador o in _operadores)
