@@ -6,8 +6,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Dominio
 {
-
-
     public class Sistema
     {
         private List<Jugador> _jugadores;
@@ -43,9 +41,9 @@ namespace Dominio
             PreCargaJugador();
             PreCargaSelecciones();
             PreCargaPartido();
-            PrecargarPeriodista();
             PreCargaIncidencia();
             PrecargarOperador();
+            PrecargarPeriodista();
 
 
         }
@@ -1493,7 +1491,24 @@ namespace Dominio
         }
         private void PrecargarPeriodista()
         {
-            AgregarPeriodista(new Periodista("Jodri", "Coll", "jordi@coll", "qwerqwer1234"));
+            Periodista jordi = new Periodista("Jodri", "Coll", "jordi@coll", "qwer1234");
+            Periodista andres = new Periodista("Andres", "Lopez", "andres@sanofi", "1234qwer");
+            Periodista manu = new Periodista("Manu", "Alfonzo", "manu@nodus", "chichi2000");
+
+            jordi.AgregarResena(DateTime.Now, _partidos[0], "El Primer Partido", "Se termina sin expectivas para el furuto");
+            jordi.AgregarResena(DateTime.Now, _partidos[1], "El Segundo Partido", "Hay que esperara que ver");
+            jordi.AgregarResena(DateTime.Now, _partidos[3], "El Tercer Partido", "Digno de ver fuera del resultado final");
+
+
+            manu.AgregarResena(DateTime.Now, _partidos[0], "Inauguración", "Resultado esperado");
+            manu.AgregarResena(DateTime.Now, _partidos[2], "Una vez mas", "No habia ganas de jugar");
+            manu.AgregarResena(DateTime.Now, _partidos[16], "Triste", "Terminando");
+
+
+            AgregarPeriodista(jordi);
+            AgregarPeriodista(andres);
+            AgregarPeriodista(manu);
+
         }
 
         public bool Login(string nombre, string password)
