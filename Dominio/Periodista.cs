@@ -33,6 +33,8 @@ namespace Dominio
             
             Id = LastID;
             LastID++;
+            _resenas = new List<Resena>();
+
         }
 
 
